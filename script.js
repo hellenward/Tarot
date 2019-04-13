@@ -30,7 +30,14 @@ $(document).ready(function() {
         let chosenCard = Math.floor(Math.random() * cardOptions.length);
         readingResultOneCard(cardOptions[chosenCard]);
       } else {
-        alert("Three cards hasn't been written yet!");
+        const newReadingArray = cardOptions.slice();
+        const cardsToShow = [];
+        for (let i=0; i < 3; i++) {
+          let chosenCard = Math.floor(Math.random() * newReadingArray.length);
+          cardsToShow.push(newReadingArray[chosenCard]);
+          newReadingArray.splice(chosenCard, 1);
+        }
+        console.log(cardsToShow);
       }
     })
 })
