@@ -5,3 +5,7 @@ body {
 .reversed {
   transform: rotate(180deg);
 }
+
+.hidden {
+  visibility: hidden;
+}

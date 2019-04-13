@@ -2,6 +2,7 @@ $(document).ready(function() {
 
   const readingResultOneCard = (card) => {
     const isReversed = Math.floor(Math.random() * 2);
+    $('.hidden').removeClass('hidden');
 
     if (isReversed === 0) {
       $(".readingResult").append(`<div>
@@ -18,10 +19,18 @@ $(document).ready(function() {
     }
   }
 
-  $('.oneCardButton').click(function(){
+  $('.readingButton').click(function(){
       $('.clearMe').empty();
       const cardOptions = window.cards;
-      let chosenCard = Math.floor(Math.random() * cardOptions.length);
-      readingResultOneCard(cardOptions[chosenCard]);
+      readingSelection = $('.readingSelection').val();
+      if (readingSelection === "select") {
+        alert("You must choose a reading!");
+        return;
+      } else if (readingSelection === "oneCard") {
+        let chosenCard = Math.floor(Math.random() * cardOptions.length);
+        readingResultOneCard(cardOptions[chosenCard]);
+      } else {
+        alert("Three cards hasn't been written yet!");
+      }
     })
 })
