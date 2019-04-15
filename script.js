@@ -27,15 +27,19 @@ const revealHidden = () => {
 
   const readingResultThreeCards = (cardsToShow) => {
     revealHidden();
-    cardsToShow.forEach(function(card) {
+    const words = ["Past", "Present", "Future"];
+    cardsToShow.forEach(function(card, index) {
+      const title = words[index];
       if(!isReversed()) {
         $(".readingResult").append(`<div>
+          <h2>${title}</h2>
           <img src="${card.image}">
           <h3>${card.name}</h3>
           <p>${card.definition}</p>
           </div>`)
       } else {
         $(".readingResult").append(`<div>
+          <h2>${title}</h2>
           <img src="${card.image}" class="reversed">
           <h3>${card.name} - Reversed</h3>
           <p>${card.reversed}</p>
