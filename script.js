@@ -75,6 +75,29 @@ const revealHidden = () => {
     })
   }
 
+  const readingResultCelticCross = (cardsToShow => {
+    revealHidden();
+    const wordsCeltic = ["The Present / The Self", "The Problem", "The Past", "The Future", "Your Focus", "Unconscious Hidden Influence", "Your Self Beliefs", "How Others See You", "Your Secret Desire", "Outcome"];
+    cardsToShow.forEach(function(card, index) {
+      const title = wordsCeltic[index];
+      if(!isReversed()) {
+        $(".readingResult").append(`<div>
+          <h2>${title}</h2>
+          <img src="${card.image}">
+          <h3>${card.name}</h3>
+          <p>${card.definition}</p>
+          </div>`)
+      } else {
+        $(".readingResult").append(`<div>
+          <h2>${title}</h2>
+          <img src="${card.image}" class="reversed">
+          <h3>${card.name} - Reversed</h3>
+          <p>${card.reversed}</p>
+          </div>`)
+        }
+    })
+  }
+
   $('.readingButton').click(function(){
       $('.clearMe').empty();
       readingSelection = $('.readingSelection').val();
@@ -98,6 +121,13 @@ const revealHidden = () => {
           newReadingArray.splice(chosenCard, 1);
         }
         readingResultHorseshoe(cardsToShow);
-      } 
+      } else if (readingselection === "celticCross") {
+        for (let i = 0; i < 10; i ++) {
+          let chosenCard = Math.floor(Math.random() * newReadingArray.length);
+          cardsToShow.push(newReadingArray[chosenCard]);
+          newReadingArray.splice(chosenCard, 1);
+        }
+        readingResultCelticCross(cardsToShow);
+      }
     })
 })
