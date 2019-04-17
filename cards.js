@@ -259,7 +259,7 @@ window.cards = [
     "number": 32,
     "name": "Page of Coins",
     "definition": "A practical endeavor. Untapped potentials are within reach. Tangible success at the beginning. A solid material base for further advancement.",
-    "reversed": "hesitation, lack of clear purpose. Thinking in terms of past achievements misses present opportunities..",
+    "reversed": "Hesitation, lack of clear purpose. Thinking in terms of past achievements misses present opportunities..",
     "message": "Message: tap into your ability to manifest a personal goal or dream.",
     "image": "./Cards/d11.jpg"
   },

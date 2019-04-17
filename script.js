@@ -14,19 +14,29 @@ const revealHidden = () => {
 
   const readingResultOneCard = (card) => {
     revealHidden();
-    if (!isReversed()) {
-      $(".readingResult").append(`<div>
-        <img src="${card.image}">
-        <h3>${card.name}</h3>
-        <p>${card.definition}</p>
-        </div>`)
-    } else {
-      $(".readingResult").append(`<div>
-        <img src="${card.image}" class="reversed">
-        <h3>${card.name} - Reversed</h3>
-        <p>${card.reversed}</p>
-        </div>`)
-    }
+    $(".readingResult").append(`<div>
+      <img src="Cards/CardBack.jpg" class="pre-revealed">
+      </div>`)
+
+    $(".pre-revealed").click(function() {
+      if (!isReversed()) {
+        $(".pre-revealed").remove();
+        $(".readingResult").append(`<div>
+          <img src="${card.image}">
+          <h3>${card.name}</h3>
+          <h4>${card.message}</h4>
+          <p>${card.definition}</p>
+          </div>`)
+        } else {
+        $(".pre-revealed").remove();
+          $(".readingResult").append(`<div>
+            <img src="${card.image}">
+            <h3>${card.name} - Reversed</h3>
+            <h4>${card.message}</h4>
+            <p>${card.reversed}</p>
+            </div>`)
+        }
+    })
   }
 
   const readingResultThreeCards = (cardsToShow) => {

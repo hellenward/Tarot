@@ -9,3 +9,8 @@ body {
 .hidden {
   visibility: hidden;
 }
+
+.pre-revealed {
+  width: 205px;
+  height: 397px;
+}
