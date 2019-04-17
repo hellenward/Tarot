@@ -75,9 +75,9 @@ const revealHidden = () => {
     })
   }
 
-  const readingResultCelticCross = (cardsToShow => {
+  const readingResultCelticCross = (cardsToShow) => {
     revealHidden();
-    const wordsCeltic = ["The Present / The Self", "The Problem", "The Past", "The Future", "Your Focus", "Unconscious Hidden Influence", "Your Self Beliefs", "How Others See You", "Your Secret Desire", "Outcome"];
+    const wordsCeltic = ["The Present or The Self", "The Problem", "The Past", "The Future", "Your Focus", "Unconscious Hidden Influence", "Your Self Beliefs", "How Others See You", "Your Secret Desire", "Outcome"];
     cardsToShow.forEach(function(card, index) {
       const title = wordsCeltic[index];
       if(!isReversed()) {
@@ -121,7 +121,7 @@ const revealHidden = () => {
           newReadingArray.splice(chosenCard, 1);
         }
         readingResultHorseshoe(cardsToShow);
-      } else if (readingselection === "celticCross") {
+      } else if (readingSelection === "celticCross") {
         for (let i = 0; i < 10; i ++) {
           let chosenCard = Math.floor(Math.random() * newReadingArray.length);
           cardsToShow.push(newReadingArray[chosenCard]);
