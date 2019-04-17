@@ -30,7 +30,7 @@ const revealHidden = () => {
         } else {
         $(".pre-revealed").remove();
           $(".readingResult").append(`<div>
-            <img src="${card.image}">
+            <img src="${card.image}" class="reversed">
             <h3>${card.name} - Reversed</h3>
             <h4>${card.message}</h4>
             <p>${card.reversed}</p>
