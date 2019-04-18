@@ -49,9 +49,15 @@ const readingResultOneCard = (card) => {
         <img src="Cards/CardBack.jpg" class="pre-revealed">
         </div>`)
     });
-
-    $(".pre-revealed").click(function() {
-      const words = ["Past", "Present", "Future"];
+    const words = ["Past", "Present", "Future"];
+    $(".pre-revealed").on.('click', event) => {
+      $(event.currentTarget).remove().append(`<div>
+        <h2>${title}</h2>
+        <img src="${card.image}">
+        <h3>${card.name}</h3>
+        <p>${card.definition}</p>
+        </div>`);
+  
       cardsToShow.forEach(function(card, index) {
         const title = words[index];
         if(!isReversed()) {
