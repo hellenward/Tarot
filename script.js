@@ -12,55 +12,69 @@ const revealHidden = () => {
   return $('.hidden').removeClass('hidden');
 }
 
-  const readingResultOneCard = (card) => {
-    revealHidden();
-    $(".readingResult").append(`<div>
-      <img src="Cards/CardBack.jpg" class="pre-revealed">
-      </div>`)
 
-    $(".pre-revealed").click(function() {
-      if (!isReversed()) {
-        $(".pre-revealed").remove();
-        $(".readingResult").append(`<div>
-          <img src="${card.image}">
-          <h3>${card.name}</h3>
-          <h4>${card.message}</h4>
-          <p>${card.definition}</p>
-          </div>`)
-        } else {
-        $(".pre-revealed").remove();
+const readingResultOneCard = (card) => {
+  revealHidden();
+  $(".readingResult").append(`<div>
+    <img src="Cards/CardBack.jpg" class="pre-revealed">
+    </div>`)
+
+    $(".pre-revealed").forEach(function() {
+      $(".pre-revealed").click(function() {
+        if (!isReversed()) {
+          $(".pre-revealed").remove();
           $(".readingResult").append(`<div>
-            <img src="${card.image}" class="reversed">
-            <h3>${card.name} - Reversed</h3>
+            <img src="${card.image}">
+            <h3>${card.name}</h3>
             <h4>${card.message}</h4>
-            <p>${card.reversed}</p>
+            <p>${card.definition}</p>
             </div>`)
-        }
+          } else {
+          $(".pre-revealed").remove();
+            $(".readingResult").append(`<div>
+              <img src="${card.image}" class="reversed">
+              <h3>${card.name} - Reversed</h3>
+              <h4>${card.message}</h4>
+              <p>${card.reversed}</p>
+              </div>`)
+          }
+      })
     })
   }
 
   const readingResultThreeCards = (cardsToShow) => {
     revealHidden();
-    const words = ["Past", "Present", "Future"];
-    cardsToShow.forEach(function(card, index) {
-      const title = words[index];
-      if(!isReversed()) {
-        $(".readingResult").append(`<div>
-          <h2>${title}</h2>
-          <img src="${card.image}">
-          <h3>${card.name}</h3>
-          <p>${card.definition}</p>
-          </div>`)
-      } else {
-        $(".readingResult").append(`<div>
-          <h2>${title}</h2>
-          <img src="${card.image}" class="reversed">
-          <h3>${card.name} - Reversed</h3>
-          <p>${card.reversed}</p>
-          </div>`)
-      }
+    cardsToShow.forEach(function(card) {
+      $(".readingResult").append(`<div>
+        <img src="Cards/CardBack.jpg" class="pre-revealed">
+        </div>`)
+    });
+
+    $(".pre-revealed").click(function() {
+      const words = ["Past", "Present", "Future"];
+      cardsToShow.forEach(function(card, index) {
+        const title = words[index];
+        if(!isReversed()) {
+          $(".pre-revealed").remove();
+          $(".readingResult").append(`<div>
+            <h2>${title}</h2>
+            <img src="${card.image}">
+            <h3>${card.name}</h3>
+            <p>${card.definition}</p>
+            </div>`)
+        } else {
+          $(".pre-revealed").remove();
+          $(".readingResult").append(`<div>
+            <h2>${title}</h2>
+            <img src="${card.image}" class="reversed">
+            <h3>${card.name} - Reversed</h3>
+            <p>${card.reversed}</p>
+            </div>`)
+        }
+      });
     })
   }
+
 
   const readingResultHorseshoe = (cardsToShow) => {
     revealHidden();
