@@ -44,40 +44,42 @@ const readingResultOneCard = (card) => {
 
   const readingResultThreeCards = (cardsToShow) => {
     revealHidden();
-    cardsToShow.forEach(function(card) {
+    const words = ["Past", "Present", "Future"];
+    cardsToShow.forEach(function(card, index) {
+      const title = words[index];
+      const reversed = isReversed();
+      let definition = card.definition;
+      let name = card.name;
+      if (reversed) {
+        definition = card.reversed;
+        name = card.name + " - Reversed";
+      }
       $(".readingResult").append(`<div>
-        <img src="Cards/CardBack.jpg" class="pre-revealed">
+        <img src="Cards/CardBack.jpg"
+          class="pre-revealed"
+          data-title="${title}"
+          data-card-name="${name}"
+          data-card-definition="${definition}"
+          data-card-is-reversed="${reversed}"
+          data-card-image="${card.image}"
+          data-card-message="${card.message}"
+        >
         </div>`)
     });
-    const words = ["Past", "Present", "Future"];
-    $(".pre-revealed").on.('click', event) => {
-      $(event.currentTarget).remove().append(`<div>
-        <h2>${title}</h2>
-        <img src="${card.image}">
-        <h3>${card.name}</h3>
-        <p>${card.definition}</p>
+    $(".pre-revealed").on('click', (event) => {
+      const currentTarget = $(event.currentTarget);
+      const isReversed = currentTarget.data("card-is-reversed");
+      let reversedClass = "";
+      if(isReversed) {
+        reversedClass = "reversed";
+      }
+      currentTarget.replaceWith(`<div>
+        <h2>${currentTarget.data("title")}</h2>
+        <img src="${currentTarget.data("card-image")}" class="${reversedClass}">
+        <h3>${currentTarget.data("card-name")} </h3>
+        <p>${currentTarget.data("card-message")}</p>
+        <p>${currentTarget.data("card-definition")}
         </div>`);
-  
-      cardsToShow.forEach(function(card, index) {
-        const title = words[index];
-        if(!isReversed()) {
-          $(".pre-revealed").remove();
-          $(".readingResult").append(`<div>
-            <h2>${title}</h2>
-            <img src="${card.image}">
-            <h3>${card.name}</h3>
-            <p>${card.definition}</p>
-            </div>`)
-        } else {
-          $(".pre-revealed").remove();
-          $(".readingResult").append(`<div>
-            <h2>${title}</h2>
-            <img src="${card.image}" class="reversed">
-            <h3>${card.name} - Reversed</h3>
-            <p>${card.reversed}</p>
-            </div>`)
-        }
-      });
     })
   }
 
