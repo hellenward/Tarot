@@ -12,62 +12,30 @@ const revealHidden = () => {
   return $('.hidden').removeClass('hidden');
 }
 
-
-const readingResultOneCard = (card) => {
-  revealHidden();
-  $(".readingResult").append(`<div>
-    <img src="Cards/CardBack.jpg" class="pre-revealed">
-    </div>`)
-
-    $(".pre-revealed").forEach(function() {
-      $(".pre-revealed").click(function() {
-        if (!isReversed()) {
-          $(".pre-revealed").remove();
-          $(".readingResult").append(`<div>
-            <img src="${card.image}">
-            <h3>${card.name}</h3>
-            <h4>${card.message}</h4>
-            <p>${card.definition}</p>
-            </div>`)
-          } else {
-          $(".pre-revealed").remove();
-            $(".readingResult").append(`<div>
-              <img src="${card.image}" class="reversed">
-              <h3>${card.name} - Reversed</h3>
-              <h4>${card.message}</h4>
-              <p>${card.reversed}</p>
-              </div>`)
-          }
-      })
-    })
+const addCard = (card, title) => {
+  const reversed = isReversed();
+  let definition = card.definition;
+  let name = card.name;
+  if (reversed) {
+    definition = card.reversed;
+    name = card.name + " - Reversed";
   }
+  const currentCard = $(`<div>
+    <img src="Cards/CardBack.jpg"
+      class="pre-revealed"
+      data-title="${title}"
+      data-card-name="${name}"
+      data-card-definition="${definition}"
+      data-card-is-reversed="${reversed}"
+      data-card-image="${card.image}"
+      data-card-message="${card.message}"
+    >
+    </div>`);
 
-  const readingResultThreeCards = (cardsToShow) => {
-    revealHidden();
-    const words = ["Past", "Present", "Future"];
-    cardsToShow.forEach(function(card, index) {
-      const title = words[index];
-      const reversed = isReversed();
-      let definition = card.definition;
-      let name = card.name;
-      if (reversed) {
-        definition = card.reversed;
-        name = card.name + " - Reversed";
-      }
-      $(".readingResult").append(`<div>
-        <img src="Cards/CardBack.jpg"
-          class="pre-revealed"
-          data-title="${title}"
-          data-card-name="${name}"
-          data-card-definition="${definition}"
-          data-card-is-reversed="${reversed}"
-          data-card-image="${card.image}"
-          data-card-message="${card.message}"
-        >
-        </div>`)
-    });
-    $(".pre-revealed").on('click', (event) => {
-      const currentTarget = $(event.currentTarget);
+  $(".readingResult").append(currentCard);
+
+    currentCard.on('click', (event) => {
+      const currentTarget = $(event.currentTarget).children("img");
       const isReversed = currentTarget.data("card-is-reversed");
       let reversedClass = "";
       if(isReversed) {
@@ -81,6 +49,21 @@ const readingResultOneCard = (card) => {
         <p>${currentTarget.data("card-definition")}
         </div>`);
     })
+}
+
+
+const readingResultOneCard = (card) => {
+  revealHidden();
+  addCard(card, "");
+}
+
+  const readingResultThreeCards = (cardsToShow) => {
+    revealHidden();
+    const words = ["Past", "Present", "Future"];
+    cardsToShow.forEach(function(card, index) {
+      const title = words[index];
+      addCard(card, title);
+    });
   }
 
 
