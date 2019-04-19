@@ -4,26 +4,41 @@
   <head>
     <meta charset="UTF-8">
     <title>Tarot Reading</title>
+    <link href="./bootstrap.min.css" type="text/css" rel="stylesheet">
     <link href="./style.css" type="text/css" rel="stylesheet">
   </head>
 
   <body>
-    <h1>Tarot Card Reading</h1>
-    <label>Choose your Reading</label>
-    <select class="readingSelection">
-      <option value="select">Select</option>
-      <option value="oneCard">One Card Reading</option>
-      <option value="threeCard">Three Card Reading</option>
-      <option value="horseshoe">Horseshoe Reading</option>
-      <option value="celticCross">Celtic Cross Reading</option>
-    </select>
-    <p>Focus on your question, click the "Pick a Card" button and let our
-      spookily psychic server find you your answer!</p>
-      <button class="readingButton" type="button">Pick a card</button>
+    <div class="container">
+      <div class="row">
+        <h1>Tarot Card Reading</h1>
+      </div>
+      <div class="row">
+        <label>Choose your Reading</label>
+        <select class="readingSelection">
+          <option value="select">Select</option>
+          <option value="oneCard">One Card Reading</option>
+          <option value="threeCard">Three Card Reading</option>
+          <option value="horseshoe">Horseshoe Reading</option>
+          <option value="celticCross">Celtic Cross Reading</option>
+        </select>
+      </div>
+      <div class="row">
+        <p>Focus on your question, click the "Pick a Card" button and let our
+          spookily psychic server find you your answer!</p>
+      </div>
+      <div class="row">
+        <button class="readingButton" type="button">Pick a card</button>
+      </div>
+      <div class="row">
+        <h2 class="hidden">Your Reading</h2>
+      </div>
 
-    <h2 class="hidden">Your Reading</h2>
-    <div class="readingResult hidden clearMe">
+      <div class="readingResult hidden clearMe row">
+      </div>
+
     </div>
+
     <script src="cards.js" type="text/javascript"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     <script type="text/javascript" src="script.js"></script>

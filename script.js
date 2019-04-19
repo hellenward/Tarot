@@ -20,7 +20,7 @@ const addCard = (card, title) => {
     definition = card.reversed;
     name = card.name + " - Reversed";
   }
-  const currentCard = $(`<div>
+  const currentCard = $(`<div class="col-4">
     <img src="Cards/CardBack.jpg"
       class="pre-revealed"
       data-title="${title}"
