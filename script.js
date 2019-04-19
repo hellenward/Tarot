@@ -12,7 +12,7 @@ const revealHidden = () => {
   return $('.hidden').removeClass('hidden');
 }
 
-const addCard = (card, title) => {
+const addCard = (destination, card, title) => {
   const reversed = isReversed();
   let definition = card.definition;
   let name = card.name;
@@ -20,7 +20,7 @@ const addCard = (card, title) => {
     definition = card.reversed;
     name = card.name + " - Reversed";
   }
-  const currentCard = $(`<div class="col-4">
+  const currentCard = $(`<div>
     <img src="Cards/CardBack.jpg"
       class="pre-revealed"
       data-title="${title}"
@@ -32,7 +32,7 @@ const addCard = (card, title) => {
     >
     </div>`);
 
-  $(".readingResult").append(currentCard);
+  $(destination).append(currentCard);
 
     currentCard.on('click', (event) => {
       const currentTarget = $(event.currentTarget).children("img");
@@ -49,12 +49,13 @@ const addCard = (card, title) => {
         <p>${currentTarget.data("card-definition")}
         </div>`);
     })
+    return currentCard;
 }
 
 
 const readingResultOneCard = (card) => {
   revealHidden();
-  addCard(card, "");
+  addCard(".readingResult", card, "");
 }
 
   const readingResultThreeCards = (cardsToShow) => {
@@ -62,17 +63,30 @@ const readingResultOneCard = (card) => {
     const words = ["Past", "Present", "Future"];
     cardsToShow.forEach(function(card, index) {
       const title = words[index];
-      addCard(card, title);
+      addCard(".readingResult", card, title).addClass("col-4");
     });
   }
 
 
   const readingResultHorseshoe = (cardsToShow) => {
     revealHidden();
+    $(".readingResult").append(`
+      <div class="col-4 col-left"></div>
+      <div class="col-4 col-mid"></div>
+      <div class="col-4 col-right"></div>
+    `)
     const wordsHorseshoe = ["Past", "Present", "Hidden Influence", "About You", "The Influence of Others", "Suggested Action", "The Final Outcome"];
     cardsToShow.forEach((card, index) => {
       const title = wordsHorseshoe[index];
-      addCard(card, title);
+      let destination = "";
+      if(index < 3) {
+        destination = ".col-left";
+      } else if (index === 3) {
+        destination = ".col-mid";
+      } else {
+        destination = ".col-right";
+      }
+      addCard(destination, card, title);
     })
   }
 
@@ -81,12 +95,13 @@ const readingResultOneCard = (card) => {
     const wordsCeltic = ["The Present or The Self", "The Problem", "The Past", "The Future", "Your Focus", "Unconscious Hidden Influence", "Your Self Beliefs", "How Others See You", "Your Secret Desire", "Outcome"];
     cardsToShow.forEach((card, index) => {
       const title = wordsCeltic[index];
-      addCard(card,title);
+      addCard(".readingResult", card,title);
     })
   }
 
   $('.readingButton').click(function(){
       $('.clearMe').empty();
+      cardsToShow.splice(0, cardsToShow.length);
       readingSelection = $('.readingSelection').val();
       if (readingSelection === "select") {
         alert("You must choose a reading!");
