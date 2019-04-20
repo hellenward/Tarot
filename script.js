@@ -64,18 +64,18 @@ const readingResultOneCard = (card) => {
   addCard(".readingResult", card, "");
 }
 
-  const readingResultThreeCards = (cardsToShow) => {
-    revealHidden();
-    const words = ["Past", "Present", "Future"];
-    cardsToShow.forEach(function(card, index) {
-      const title = words[index];
-      addCard(".readingResult", card, title).addClass("col-4");
-    });
-  }
+const readingResultThreeCards = (cardsToShow) => {
+  revealHidden();
+  const words = ["Past", "Present", "Future"];
+  cardsToShow.forEach(function(card, index) {
+    const title = words[index];
+    addCard(".readingResult", card, title).addClass("col-4");
+  });
+}
 
 
-  const readingResultHorseshoe = (cardsToShow) => {
-    revealHidden();
+const readingResultHorseshoe = (cardsToShow) => {
+  revealHidden();
     $(".readingResult").append(`
       <div class="col-4 col-left"></div>
       <div class="col-4 col-mid"></div>
@@ -98,10 +98,26 @@ const readingResultOneCard = (card) => {
 
   const readingResultCelticCross = (cardsToShow) => {
     revealHidden();
+    $(".readingResult").append(`
+      <div class="col-3 col-left left-horsehoe"></div>
+      <div class="col-3 col-mid"></div>
+      <div class="col-3 col-right"></div>
+      <div class="col-3 col-far-right"></div>
+    `)
     const wordsCeltic = ["The Present or The Self", "The Problem", "The Past", "The Future", "Your Focus", "Unconscious Hidden Influence", "Your Self Beliefs", "How Others See You", "Your Secret Desire", "Outcome"];
     cardsToShow.forEach((card, index) => {
       const title = wordsCeltic[index];
-      addCard(".readingResult", card,title);
+      let destination = "";
+      if (index < 2 || index === 4 || index === 5) {
+        destination = ".col-mid";
+      } else if (index === 2) {
+        destination = ".col-left";
+      } else if (index === 3) {
+        destination = ".col-right";
+      } else if (index > 5) {
+        destination = ".col-far-right";
+      }
+      addCard(destination, card,title);
     })
   }
 
