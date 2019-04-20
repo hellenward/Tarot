@@ -12,6 +12,12 @@ const revealHidden = () => {
   return $('.hidden').removeClass('hidden');
 }
 
+const chooseCard = () => {
+  let chosenCard = Math.floor(Math.random() * newReadingArray.length);
+  cardsToShow.push(newReadingArray[chosenCard]);
+  newReadingArray.splice(chosenCard, 1);
+}
+
 const addCard = (destination, card, title) => {
   const reversed = isReversed();
   let definition = card.definition;
@@ -111,23 +117,17 @@ const readingResultOneCard = (card) => {
         readingResultOneCard(cardOptions[chosenCard]);
       } else if (readingSelection === "threeCard") {
         for (let i=0; i < 3; i++) {
-          let chosenCard = Math.floor(Math.random() * newReadingArray.length);
-          cardsToShow.push(newReadingArray[chosenCard]);
-          newReadingArray.splice(chosenCard, 1);
+          chooseCard();
         }
         readingResultThreeCards(cardsToShow);
       } else if (readingSelection === "horseshoe") {
         for (let i=0; i < 7; i++) {
-          let chosenCard = Math.floor(Math.random() * newReadingArray.length);
-          cardsToShow.push(newReadingArray[chosenCard]);
-          newReadingArray.splice(chosenCard, 1);
+          chooseCard();
         }
         readingResultHorseshoe(cardsToShow);
       } else if (readingSelection === "celticCross") {
         for (let i = 0; i < 10; i ++) {
-          let chosenCard = Math.floor(Math.random() * newReadingArray.length);
-          cardsToShow.push(newReadingArray[chosenCard]);
-          newReadingArray.splice(chosenCard, 1);
+          chooseCard();
         }
         readingResultCelticCross(cardsToShow);
       }
