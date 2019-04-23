@@ -18,7 +18,7 @@ const chooseCard = () => {
   newReadingArray.splice(chosenCard, 1);
 }
 
-const addCard = (destination, card, title) => {
+const addCard = (destination, card, title, index) => {
   const reversed = isReversed();
   let definition = card.definition;
   let name = card.name;
@@ -27,6 +27,7 @@ const addCard = (destination, card, title) => {
     name = card.name + " - Reversed";
   }
   const currentCard = $(`<div>
+    <p class="cardNumber">${index + 1}</p>
     <img src="Cards/CardBack.jpg"
       class="pre-revealed"
       data-title="${title}"
@@ -40,85 +41,107 @@ const addCard = (destination, card, title) => {
 
   $(destination).append(currentCard);
 
-    currentCard.on('click', (event) => {
-      const currentTarget = $(event.currentTarget).children("img");
+    currentCard.on('click', function(event) {
+      const currentTarget = $(this).children("img");
       const isReversed = currentTarget.data("card-is-reversed");
       let reversedClass = "";
       if(isReversed) {
         reversedClass = "reversed";
       }
-      currentTarget.replaceWith(`<div>
-        <h2>${currentTarget.data("title")}</h2>
+      currentTarget.replaceWith(`<div class="outerHover">
         <img src="${currentTarget.data("card-image")}" class="${reversedClass}">
-        <h3>${currentTarget.data("card-name")} </h3>
-        <p>${currentTarget.data("card-message")}</p>
-        <p>${currentTarget.data("card-definition")}
+        <div class="revealOnHover">
+          <h2>${currentTarget.data("title")}</h2>
+          <h3>${currentTarget.data("card-name")} </h3>
+          <p>${currentTarget.data("card-message")}</p>
+          <p>${currentTarget.data("card-definition")}
+        </div>
         </div>`);
     })
     return currentCard;
 }
 
+const addCards = (cards, words) => {
+  cards.forEach((card, index) => {
+    const title = words[index];
+    const destination = `[data-index="${index}"]`;
+    addCard(destination, card, title, index);
+  })
+}
+
 
 const readingResultOneCard = (card) => {
   revealHidden();
-  addCard(".readingResult", card, "");
+  $(".readingResult").append(`
+    <div class="row">
+      <div class="col-4 offset-4" data-index="0"></div>
+    </div>
+    `)
+  addCards([card], [""]);
 }
 
 const readingResultThreeCards = (cardsToShow) => {
   revealHidden();
+  $(".readingResult").append(`
+    <div class="row">
+      <div class="col-4" data-index="0"></div>
+      <div class="col-4" data-index="1"></div>
+      <div class="col-4" data-index="2"></div>
+    </div>
+    `)
   const words = ["Past", "Present", "Future"];
-  cardsToShow.forEach(function(card, index) {
-    const title = words[index];
-    addCard(".readingResult", card, title).addClass("col-4");
-  });
+  addCards(cardsToShow, words);
 }
 
 
 const readingResultHorseshoe = (cardsToShow) => {
   revealHidden();
     $(".readingResult").append(`
-      <div class="col-4 col-left"></div>
-      <div class="col-4 col-mid"></div>
-      <div class="col-4 col-right"></div>
+      <div class="row">
+        <div class="col-4" data-index="0"></div>
+        <div class="col-4 offset-4" data-index="6"></div>
+      </div>
+      <div class="row">
+        <div class="col-4" data-index="1"></div>
+        <div class="col-4 offset-4" data-index="5"></div>
+      </div>
+      <div class="row">
+        <div class="col-4" data-index="2"></div>
+        <div class="col-4" data-index="3"></div>
+        <div class="col-4" data-index="4"></div>
+      </div>
     `)
     const wordsHorseshoe = ["Past", "Present", "Hidden Influence", "About You", "The Influence of Others", "Suggested Action", "The Final Outcome"];
-    cardsToShow.forEach((card, index) => {
-      const title = wordsHorseshoe[index];
-      let destination = "";
-      if(index < 3) {
-        destination = ".col-left";
-      } else if (index === 3) {
-        destination = ".col-mid";
-      } else {
-        destination = ".col-right";
-      }
-      addCard(destination, card, title);
-    })
+    addCards(cardsToShow, wordsHorseshoe);
   }
 
   const readingResultCelticCross = (cardsToShow) => {
     revealHidden();
     $(".readingResult").append(`
-      <div class="col-3 col-left left-horsehoe"></div>
-      <div class="col-3 col-mid"></div>
-      <div class="col-3 col-right"></div>
-      <div class="col-3 col-far-right"></div>
+      <div class="celticCrossContainer">
+        <div class="row">
+          <div class="col-3 offset-3" data-index="4"></div>
+          <div class="col-3 offset-3" data-index="9"></div>
+        </div>
+        <div class="row">
+          <div class="col-3" data-index="2"></div>
+          <div class="col-3" data-index="0">
+            <div class="awkward" data-index="1"></div>
+          </div>
+          <div class="col-3" data-index="3"></div>
+          <div class="col-3" data-index="8"></div>
+        </div>
+        <div class="row">
+          <div class="col-3 offset-3" data-index="5"></div>
+          <div class="col-3 offset-3" data-index="7"></div>
+        </div>
+        <div class="row">
+          <div class="col-3 offset-9" data-index="6"></div>
+        </div>
+      </div>
     `)
     const wordsCeltic = ["The Present or The Self", "The Problem", "The Past", "The Future", "Your Focus", "Unconscious Hidden Influence", "Your Self Beliefs", "How Others See You", "Your Secret Desire", "Outcome"];
-    cardsToShow.forEach((card, index) => {
-      const title = wordsCeltic[index];
-      let destination = "";
-      if (index < 2 || index === 4 || index === 5) {
-        destination = ".col-mid";
-      } else if (index === 2) {
-        destination = ".col-left";
-      } else if (index === 3) {
-        destination = ".col-right";
-      } else if (index > 5) {
-        destination = ".col-far-right";
-      }
-      addCard(destination, card,title);
-    })
+    addCards(cardsToShow, wordsCeltic);
   }
 
   $('.readingButton').click(function(){

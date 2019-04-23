@@ -14,3 +14,45 @@ body {
   width: 205px;
   height: 397px;
 }
+
+.readingResult {
+  text-align: center;
+}
+
+.celticCrossContainer > div > div:not(:last-child){
+  transform: translate(0, 50%);
+}
+
+.readingResult > div > div {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.cardNumber {
+  margin: 0;
+  margin-top: -20px;
+}
+
+.awkward {
+  position: absolute;
+  transform: rotate(-90deg);
+  z-index: 0;
+}
+
+.awkward .revealOnHover {
+  transform: translate(0, -50%) rotate(90deg);
+  z-index: 0;
+}
+
+.revealOnHover {
+  display: none;
+  position: absolute;
+  top: 50%;
+  transform: translate(0, -50%);
+  background-color: rgba(189, 176, 176, 0.88);
+  padding: 10px;
+}
+
+.outerHover:hover .revealOnHover {
+  display: block;
+}
