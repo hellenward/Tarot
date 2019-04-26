@@ -102,9 +102,11 @@ const readingResultHorseshoe = (cardsToShow) => {
         <div class="col-4 offset-4" data-index="5"></div>
       </div>
       <div class="row">
-        <div class="col-4" data-index="2"></div>
-        <div class="col-4" data-index="3"></div>
-        <div class="col-4" data-index="4"></div>
+        <div class="col-6" data-index="2"></div>
+        <div class="col-6" data-index="4"></div>
+      </div>
+      <div class="row">
+        <div class="col" data-index="3"></div>
       </div>
     `)
     const wordsHorseshoe = ["Past", "Present", "Hidden Influence", "About You", "The Influence of Others", "Suggested Action", "The Final Outcome"];
