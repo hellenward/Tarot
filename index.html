@@ -11,28 +11,40 @@
 
   <body>
     <div class="container">
-      <div class="row">
-        <h1>Tarot Card Reading</h1>
+      <div class="greyBox">
+        <div class="row">
+          <div class="col">
+            <h1>Tarot Card Reading</h1>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <label>Choose your Reading</label>
+            <select class="readingSelection">
+              <option value="select">Select</option>
+              <option value="oneCard">One Card Reading</option>
+              <option value="threeCard">Three Card Reading</option>
+              <option value="horseshoe">Horseshoe Reading</option>
+              <option value="celticCross">Celtic Cross Reading</option>
+            </select>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <p>Focus on your question, click the "Pick a Card" button and let our
+              spookily psychic server find you your answer!</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <button class="readingButton" type="button">Get Your Reading</button>
+          </div>
+        </div>
       </div>
-      <div class="row">
-        <label>Choose your Reading</label>
-        <select class="readingSelection">
-          <option value="select">Select</option>
-          <option value="oneCard">One Card Reading</option>
-          <option value="threeCard">Three Card Reading</option>
-          <option value="horseshoe">Horseshoe Reading</option>
-          <option value="celticCross">Celtic Cross Reading</option>
-        </select>
-      </div>
-      <div class="row">
-        <p>Focus on your question, click the "Pick a Card" button and let our
-          spookily psychic server find you your answer!</p>
-      </div>
-      <div class="row">
-        <button class="readingButton" type="button">Pick a card</button>
-      </div>
-      <div class="row">
-        <h2 class="hidden">Your Reading</h2>
+      <div class="row topSpacer">
+        <div class="col">
+          <h2 class="hidden">Your Reading</h2>
+        </div>
       </div>
 
       <div class="readingResult hidden clearMe">
