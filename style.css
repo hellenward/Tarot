@@ -10,6 +10,10 @@ body {
   visibility: hidden;
 }
 
+.hiddenDisplay {
+  display: none;
+}
+
 .pre-revealed {
   width: 205px;
   height: 397px;

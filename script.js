@@ -26,37 +26,33 @@ const addCard = (destination, card, title, index) => {
     definition = card.reversed;
     name = card.name + " - Reversed";
   }
-  const currentCard = $(`<div>
+  const currentCard = $(`<div class="outerHover">
     <p class="cardNumber">${index + 1}</p>
     <img src="Cards/CardBack.jpg"
       class="pre-revealed"
-      data-title="${title}"
-      data-card-name="${name}"
-      data-card-definition="${definition}"
       data-card-is-reversed="${reversed}"
       data-card-image="${card.image}"
-      data-card-message="${card.message}"
     >
+    <div class="hiddenDisplay">
+      <h2>${title}</h2>
+      <h3>${name}</h3>
+      <p>${card.message}</p>
+      <p>${definition}</p>
+    </div>
     </div>`);
 
   $(destination).append(currentCard);
 
     currentCard.on('click', function(event) {
-      const currentTarget = $(this).children("img");
-      const isReversed = currentTarget.data("card-is-reversed");
+      const currentTarget = $(this);
+      const currentTargetImage = currentTarget.children('img');
+      const isReversed = currentTargetImage.data("card-is-reversed");
       let reversedClass = "";
       if(isReversed) {
         reversedClass = "reversed";
       }
-      currentTarget.replaceWith(`<div class="outerHover">
-        <img src="${currentTarget.data("card-image")}" class="${reversedClass}">
-        <div class="revealOnHover">
-          <h2>${currentTarget.data("title")}</h2>
-          <h3>${currentTarget.data("card-name")} </h3>
-          <p>${currentTarget.data("card-message")}</p>
-          <p>${currentTarget.data("card-definition")}
-        </div>
-        </div>`);
+      currentTargetImage.attr("src", currentTargetImage.data("card-image")).addClass(reversedClass);
+      currentTarget.children(".hiddenDisplay").removeClass("hiddenDisplay").addClass("revealOnHover");
     })
     return currentCard;
 }
